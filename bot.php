@@ -1,6 +1,7 @@
 <?php
 //httpful used for curl wrapper
 require_once('inc/httpful.phar');
+use Httpful\Request;
 
 class reddit_api
 {
@@ -46,7 +47,7 @@ class reddit_api
     
     function login_oath()
     {
-        $request = \Httpful\Request::post('https://www.reddit.com/api/v1/access_token');
+        $request = Request::post('https://www.reddit.com/api/v1/access_token');
         $request -> addHeader('User-Agent',$this->bot_name);
         $request->basicAuth($this->client_id,$this->client_secret);
         $request->body('grant_type=password&username='.$this->username.'&password='.$this->password);
@@ -71,9 +72,9 @@ class reddit_api
         $host=$this->auth_type==1?reddit_api::$url:reddit_api::$url_oath;
         $api=strpos($path,'/api/v1/')!==false?1:2;
         if (substr($path,0,5) =='/api/' || $data!==null)
-            $request = \Httpful\Request::post($host.$path);
+            $request = Request::post($host.$path);
         else
-            $request = \Httpful\Request::get($host.$path);
+            $request = Request::get($host.$path);
         $this->last_url=$host.$path;
         $request -> addHeader('User-Agent',$this->bot_name);
         if ($this->modhash!==null)
@@ -144,7 +145,6 @@ class reddit_bot
     function process_rules()
     {
         $page=null;
-        $page_path='';
         $page_hash='';
         foreach ($this->rules as $rule)
         {
@@ -363,7 +363,7 @@ class rule
 }
 
 //Init bot
-require_once ('bot_login_details.php');
+require_once ('bot_specific.php');
 $my_bot = new reddit_bot(
     bot_specific::$user_name,
     bot_specific::$password,
