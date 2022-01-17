@@ -1,4 +1,5 @@
 <?php
+//httpful used for curl wrapper
 require_once('inc/httpful.phar');
 
 class reddit_api
