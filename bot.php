@@ -363,15 +363,15 @@ class rule
 }
 
 //Init bot
-require_once ('bot_specific.php');
+require_once ('bot_details.php');
 $my_bot = new reddit_bot(
-    bot_specific::$user_name,
-    bot_specific::$password,
-    bot_specific::$client_id,
-    bot_specific::$client_secret);
+    bot_details::$user_name,
+    bot_details::$password,
+    bot_details::$client_id,
+    bot_details::$client_secret);
 
 //Add Rules
-$my_bot->rules[]=bot_specific::rules();
+$my_bot->rules[]=bot_details::rules();
 
 //Process
 $my_bot->login();
