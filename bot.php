@@ -371,59 +371,7 @@ $my_bot = new reddit_bot(
     bot_specific::$client_secret);
 
 //Add Rules
-//TODO:add fail_id to array for flair rules
-$my_bot->rules[]=array(
-    'sub'=>bot_specific::$sub_reddit,'page'=>'unmoderated',
-    'action'=>'remove',
-    'mod_note'=>'no upvotes',
-    'reason_id'=>'12shmkmyn5v44',
-    'check'=>'created_utc<'.(time()-60*60*2).'&&score<2');
-$my_bot->rules[]=array(
-    'sub'=>bot_specific::$sub_reddit,'page'=>'reports',
-    'action'=>'remove',
-    'mod_note'=>'reported < 10',
-    'reason_id'=>'140pankj60nvh',
-    'check'=>'num_reports>0&&score<11');
-$my_bot->rules[]=array(
-    'sub'=>bot_specific::$sub_reddit,'page'=>'reports',
-    'action'=>'remove',
-    'mod_note'=>'reported < 20',
-    'reason_id'=>'140pankj60nvh',
-    'check'=>'num_reports>1&&score<21');
-$my_bot->rules[]=array(
-    'sub'=>bot_specific::$sub_reddit,'page'=>'reports',
-    'action'=>'remove',
-    'mod_note'=>'reported, ratio',
-    'reason_id'=>'140pankj60nvh',
-    'check'=>'(score/num_reports)<100');
-$my_bot->rules[]=array(
-    'sub'=>bot_specific::$sub_reddit,'page'=>'reports',
-    'action'=>'flair_spam',
-    'flair_template_id'=>'c251ea22-ca14-11ea-9e84-0ed2938c6f25',
-    'check'=>'(spam_reports>2)&&score<300');
-$my_bot->rules[]=array(
-    'sub'=>bot_specific::$sub_reddit,'page'=>'reports',
-    'action'=>'flair_repost_spam',
-    'flair_template_id'=>'07dc98c4-ca26-11ea-a0c0-0ee57b03db9b',
-    'check'=>'(spam_repost_reports>1)&&score<200');
-$my_bot->rules[]=array(
-    'sub'=>bot_specific::$sub_reddit,'page'=>'reports',
-    'action'=>'flair_nopulse_spam',
-    'flair_template_id'=>'77f66740-d06e-11ea-badd-0ecd8d2ebc75',
-    'check'=>'(spam_nopulse_reports>1)&&score<200');
-$my_bot->rules[]=array(
-    'sub'=>bot_specific::$sub_reddit,'page'=>'reports',
-    'action'=>'flair_clear_spam',
-    'flair_template_id'=>'',
-    'check'=>'flared_as_spam&&score>300');
-$my_bot->rules[]=array(
-    'sub'=>bot_specific::$sub_reddit,'page'=>'log',
-    'action'=>'ban_temp',
-    'ban_reason'=>'Spam',
-    'duration'=>2,
-    'ban_message'=>'2 day ban for spamming. I am a bot message the admin if you do not agree.',
-    'mod_note'=>'too much spam',
-    'check'=>'array_count(spamlink_count,"value>4")');
+$my_bot->rules[]=bot_specific::rules();
 
 //Process
 $my_bot->login();
