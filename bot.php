@@ -219,7 +219,7 @@ class reddit_bot
                                 'spam'=>$is_spam
                             ));
                             $this->api->doCommand('/api/v1/modactions/removal_reasons/?raw_json=1&gilding_detail=1',array(
-                                'item_ids'=>array($post->data->target_fullname),
+                                'item_ids'=>array($post->data->name),
                                 'reason_id'=>$rule['reason_id'],
                                 'mod_note'=>$rule['mod_note']
                             ));
@@ -371,7 +371,7 @@ $my_bot = new reddit_bot(
     bot_details::$client_secret);
 
 //Add Rules
-$my_bot->rules[]=bot_details::rules();
+$my_bot->rules=bot_details::rules();
 
 //Process
 $my_bot->login();
