@@ -1,7 +1,7 @@
 # RedditBot
 Simple Reddit bot to perform admin functions (remove/flair/ban) based on rules (reports/votes/time)
 
-#Usage
+# Usage
 
 Edit bot_details.php with your Reddit account details and sub reddit name.
 
